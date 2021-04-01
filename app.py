@@ -101,6 +101,8 @@ def post():
 
 @app.route('/question/<int:id>', methods=["GET", "POST"])
 def question(id):
+	if not session.get("logged"):
+		return redirect(url_for("login"))
 	question = Questions.query.filter_by(id=id).first()
 	if request.method == "POST":
 		answer = request.form["answer"]
@@ -119,10 +121,8 @@ def question(id):
 @app.route("/logout")
 def logout():
 	session["logged"] = False
-<<<<<<< HEAD
 	return redirect('/login')
-=======
->>>>>>> 12919b0a9069bedc10d5faa69577f9c44a2bbadb
+
 
 
 if __name__ == "__main__":

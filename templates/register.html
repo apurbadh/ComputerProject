@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script type="text/javascript">
+    function check(){
+        let form = document.querySelector("#form");
+        let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+        let passw = document.querySelector("#passw").value;
+        let cpass = document.querySelector("#cpassw").value;
+        if (passw !== cpassw){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Password donot match!'})
+        }
+        else if(!regex.test(passw)){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Insecure Password!'})
+        }else{
+          form.submit()
+        }
+    }
+  </script>
 </head>
 <body>
 	<div class="log-form">
   <h2>Register to your account</h2>
-  <form>
-    <input type="text" title="username" placeholder="Full Name" name="fullname" />
-    <input type="text" title="username" placeholder="Username" name="username" />
-    <input type="password" title="username" placeholder="Password" name="password" />
-    <input type="password" title="username" placeholder="Confirm Password" name="confirm" />
+  <form method="post" id="form">
+    <input type="text" title="username" placeholder="Full Name" name="fullname" id="fname" />
+    <input type="text" title="username" placeholder="Username" name="username" id="uname" />
+    <input type="password" title="username" placeholder="Password" name="password" id="passw" />
+    <input type="password" title="username" placeholder="Confirm Password" name="confirm" id="cpassw" />
         <a class="forgot" href="/login">Already have an account?</a>
 
-    <button type="submit" class="btn">Register</button>
+    <input type="button" onclick="check()" class="btn" placeholder="Register">
   </form>
 </div><!--end log form -->
 </body>

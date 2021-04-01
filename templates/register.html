@@ -5,18 +5,33 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/login.css">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script type="text/javascript">
+    function myFunc(vars) {
+    return vars
+}
+    let mes = myFunc( {{message|tojson}} )
+
+    window.onload = () => mes !== "" && mes != "Sucessfully Registered" ? Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: mes}) : mes == "Sucessfully Registered" ? Swal.fire({
+        icon: 'success',
+        title: 'Congratulation',
+        text: mes}) : console.log("");
+    
+  </script>
+  <script type="text/javascript">
     function check(){
         let form = document.querySelector("#form");
         let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
         let passw = document.querySelector("#passw").value;
         let cpass = document.querySelector("#cpassw").value;
-        if (passw !== cpassw){
+        if (passw != cpass){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Password donot match!'})
-        }
-        else if(!regex.test(passw)){
+              text: "Password doesn't match!"})
+
+        }else if(!regex.test(passw)){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',

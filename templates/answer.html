@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Science Forum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.2.89/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+      <script type="text/javascript">
+        
+        function submitf(){
+            let question = document.querySelector("#quest").value;
+            if (!question){
+                Swal.fire("Please Write a question")
+            }
+            else{
+                let form = document.getElementById("formq")
+                form.submit();
+            }
+        }
+    </script>
+  </head>
+  <body>
+    
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container hero-forum has-text-centered">
+                <a href="/"><h1 class="title">
+                  Science Forum
+                </h1></a>
+                <br>
+                <h2 class="subtitle">
+            </div>
+        </div>
+    </section>
+    <br/>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-three-quarters">
+
+                <div class="box forum">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image avatar is-64x64">
+                                <img src="/static/img/user.png" alt="Image" class="is-rounded">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                        	<p>{{ question.user }}</p>
+                            <div class="content list-forum">
+                                <p class="text-content">
+                                    <a href="#">{{ question.question }}
+                                </span>
+                              </a>
+                                </p>
+                                <p class="info-content">
+                                    <a>
+                                        <i class="mdi mdi-comment-text-multiple-outline"></i>
+                                        <small>{{ question.no_answ }}</small>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+        </div>
+        <form method="POST" action="" id="formq">
+
+                <div class="field is-grouped">
+                    <p class="control is-expanded">
+                        <input class="input is-medium" type="text" id="quest" placeholder="Enter answer..." name="answer">
+                    </p>
+                    <p class="control">
+                        <button class="button is-medium is-info" onclick="submitf()">
+                      Post
+                    </button>
+
+                    </p>
+                </div>
+           </form>
+           <br>
+        <h2 style="font-size: 30px">Answers</h2>
+        <br>
+        <div class="columns">
+            <div class="column is-three-quarters">
+            {% for answer in answers %}
+                <div class="form box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image avatar is-64x64">
+
+                                <img src="/static/img/user.png" alt="Image" class="is-rounded">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                        	<p>{{ answer.user }}</p>
+                            <div class="content list-forum">
+                                <p class="text-content">
+                                    {{ answer.answer }}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

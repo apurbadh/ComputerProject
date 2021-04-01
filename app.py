@@ -119,7 +119,10 @@ def question(id):
 @app.route("/logout")
 def logout():
 	session["logged"] = False
+<<<<<<< HEAD
 	return redirect('/login')
+=======
+>>>>>>> 12919b0a9069bedc10d5faa69577f9c44a2bbadb
 
 
 if __name__ == "__main__":

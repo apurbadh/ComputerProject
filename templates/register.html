@@ -30,14 +30,14 @@
 <body>
 	<div class="log-form">
   <h2>Register to your account</h2>
-  <form method="post" id="form">
+  <form method="post" id="form" onsubmit="event.preventDefault()">
     <input type="text" title="username" placeholder="Full Name" name="fullname" id="fname" />
     <input type="text" title="username" placeholder="Username" name="username" id="uname" />
     <input type="password" title="username" placeholder="Password" name="password" id="passw" />
     <input type="password" title="username" placeholder="Confirm Password" name="confirm" id="cpassw" />
-        <a class="forgot" href="/login">Already have an account?</a>
-
-    <input type="button" onclick="check()" class="btn" placeholder="Register">
+<a class="forgot" href="/login">Already have an account?</a>
+    <button class="btn" onclick="check()">Register</button>
+            
   </form>
 </div><!--end log form -->
 </body>

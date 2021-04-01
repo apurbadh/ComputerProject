@@ -86,7 +86,7 @@ body {
   margin: 0;
   font-weight: 200;
 }
-.log-form input {
+.log-form input:not(.reg) {
   display: block;
   margin: auto auto;
   width: 100%;
@@ -97,7 +97,7 @@ body {
   padding-bottom: 1.25em;
   color: #757575;
 }
-.log-form input:focus {
+.log-form input:not(.reg):focus {
   outline: none;
 }
 .log-form .btn {

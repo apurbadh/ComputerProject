@@ -70,3 +70,8 @@
         width:60%
     }
   }
+
+.btn {
+  align-items: flex-end;
+  text-align: center;
+}

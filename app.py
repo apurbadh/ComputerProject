@@ -110,6 +110,10 @@ def question(id):
 		final.append(answers[i])
 	return render_template('answer.html', question=question, answers=final)
 
+@app.route("/logout")
+def logout():
+	session["logged"] = False
+
 
 if __name__ == "__main__":
 	database.create_all()

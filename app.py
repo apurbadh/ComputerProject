@@ -111,6 +111,7 @@ def question(id):
 		database.session.add(ans)
 		database.session.commit()
 		question.no_answ += 1
+		database.session.commit()
 	
 	answers = Answers.query.filter_by(qid=id)
 	final = []

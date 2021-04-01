@@ -27,7 +27,7 @@ class Questions(database.Model):
 	def __init__(self, user, question):
 		self.user = user
 		self.question = question
-		no_answ = 0
+		self.no_answ = 0
 
 class Answers(database.Model):
 	id = database.Column(database.Integer, primary_key=True)
@@ -52,6 +52,8 @@ def index():
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+	if session.get("logged"):
+		return redirect("/")
 	message = ""
 	if request.method == "POST":
 		username = request.form["username"]
@@ -70,6 +72,8 @@ def login():
 
 @app.route('/register', methods=["POST", "GET"])
 def register():
+	if session.get("logged"):
+		return redirect("/")
 	message = ""
 	if request.method == "POST":
 		fname = request.form['fullname']
@@ -97,18 +101,25 @@ def post():
 
 @app.route('/question/<int:id>', methods=["GET", "POST"])
 def question(id):
+	question = Questions.query.filter_by(id=id).first()
 	if request.method == "POST":
 		answer = request.form["answer"]
 		user = session["user"]
 		ans = Answers(id, user, answer)
 		database.session.add(ans)
 		database.session.commit()
-	question = Questions.query.filter_by(id=id).first()
+		question.no_answ += 1
+	
 	answers = Answers.query.filter_by(qid=id)
 	final = []
 	for i in range(answers.count() - 1, -1, -1):
 		final.append(answers[i])
 	return render_template('answer.html', question=question, answers=final)
+
+@app.route("/logout")
+def logout():
+	session["logged"] = False
+	return redirect('/login')
 
 
 if __name__ == "__main__":
